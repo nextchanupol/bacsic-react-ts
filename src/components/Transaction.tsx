@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { TransactionSchema } from "../schema/TransactionSchema";
 import Item from "./Item";
 
@@ -10,6 +10,7 @@ interface TransactionProps {
 
 const Transaction: FC<TransactionProps> = (props) => {
 	const { items } = props;
+
 	return (
 		<>
 			<ul className="item-list">
