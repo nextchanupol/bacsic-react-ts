@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { CSSProperties, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+import "./App.css";
+import FormComponent from "./components/FormComponent";
+import Transaction from "./components/Transaction";
+import { TransactionSchema } from "./schema/TransactionSchema";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const initData: TransactionSchema[] = [];
+	const [items, setItems] = useState<TransactionSchema[]>(initData);
+
+	const styles: { [key: string]: CSSProperties } = {
+		h1: {
+			textAlign: "center",
+			color: "blue",
+			fontSize: "1.5rem",
+		},
+	};
+
+	const onAddNewItem = (item: TransactionSchema) => {
+		console.log("onAddNewItem", item);
+		setItems((prevItem: TransactionSchema[]) => {
+			return [item, ...prevItem];
+		});
+	};
+
+	return (
+		<>
+			<div className="container">
+				<h1 style={styles.h1}>Basic React</h1>
+				<FormComponent onAddNewItem={onAddNewItem} />
+				<Transaction items={items} />
+			</div>
+		</>
+	);
 }
 
 export default App;
