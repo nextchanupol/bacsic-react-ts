@@ -1,5 +1,4 @@
-import React, { CSSProperties, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { CSSProperties, useEffect, useReducer, useState } from "react";
 
 import "./App.css";
 import DataContext from "./context/DataContext";
@@ -14,6 +13,8 @@ function App() {
 
 	const [income, setIncome] = useState<number>(0);
 	const [expense, setExpense] = useState<number>(0);
+
+	// const [showSummation, setShowSummation] = useState<boolean>(false);
 
 	useEffect(() => {
 		const amounts = items.map((item) => item.amount);
@@ -43,6 +44,45 @@ function App() {
 		});
 	};
 
+	// TODO: useReducer here
+	enum ShowSummationActionKind {
+		SHOW = "SHOW",
+		HIDE = "HIDE",
+	}
+	interface ShowSummationAction {
+		type: ShowSummationActionKind;
+		// payload: boolean;
+	}
+	type ShowSummationState = {
+		isShow: boolean;
+	};
+
+	const reducer = (state: ShowSummationState, action: ShowSummationAction) => {
+		switch (action.type) {
+			case ShowSummationActionKind.SHOW:
+				// return {
+				// 	...state,
+				// 	value: true,
+				// };
+				// return setShowSummation(true);
+				return { isShow: true };
+			case ShowSummationActionKind.HIDE:
+				// return {
+				// 	...state,
+				// 	value: false,
+				// };
+				// return setShowSummation(false);
+				return { isShow: false };
+			default:
+				return state;
+		}
+	};
+
+	const initIsShowState: ShowSummationState = {
+		isShow: false,
+	};
+	const [showSummation, dispatch] = useReducer(reducer, initIsShowState);
+
 	return (
 		<>
 			<DataContext.Provider
@@ -53,10 +93,26 @@ function App() {
 			>
 				<div className="container">
 					<h1 style={styles.h1}>Basic React</h1>
-
-					<Summation />
+					Current State: {showSummation.isShow.toString()}
+					{showSummation.isShow && <Summation />}
 					<FormComponent onAddNewItem={onAddNewItem} />
 					<Transaction items={items} />
+					<button
+						onClick={() => {
+							// dispatch({ type: ShowSummationActionKind.SHOW, payload: true });
+							dispatch({ type: ShowSummationActionKind.SHOW });
+						}}
+					>
+						แสดง
+					</button>
+					<button
+						onClick={() => {
+							// dispatch({ type: ShowSummationActionKind.HIDE, payload: false });
+							dispatch({ type: ShowSummationActionKind.HIDE });
+						}}
+					>
+						ซ่อน
+					</button>
 				</div>
 			</DataContext.Provider>
 		</>
