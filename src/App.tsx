@@ -35,6 +35,12 @@ function App() {
 			color: "blue",
 			fontSize: "1.5rem",
 		},
+		showSummationContainer: {
+			justifyContent: "center",
+			display: "flex",
+			
+		},
+		btn: {}
 	};
 
 	const onAddNewItem = (item: TransactionSchema) => {
@@ -60,17 +66,9 @@ function App() {
 	const reducer = (state: ShowSummationState, action: ShowSummationAction) => {
 		switch (action.type) {
 			case ShowSummationActionKind.SHOW:
-				// return {
-				// 	...state,
-				// 	value: true,
-				// };
 				// return setShowSummation(true);
 				return { isShow: true };
 			case ShowSummationActionKind.HIDE:
-				// return {
-				// 	...state,
-				// 	value: false,
-				// };
 				// return setShowSummation(false);
 				return { isShow: false };
 			default:
@@ -97,22 +95,24 @@ function App() {
 					{showSummation.isShow && <Summation />}
 					<FormComponent onAddNewItem={onAddNewItem} />
 					<Transaction items={items} />
-					<button
-						onClick={() => {
-							// dispatch({ type: ShowSummationActionKind.SHOW, payload: true });
-							dispatch({ type: ShowSummationActionKind.SHOW });
-						}}
-					>
-						แสดง
-					</button>
-					<button
-						onClick={() => {
-							// dispatch({ type: ShowSummationActionKind.HIDE, payload: false });
-							dispatch({ type: ShowSummationActionKind.HIDE });
-						}}
-					>
-						ซ่อน
-					</button>
+					<div style={styles.showSummationContainer}>
+						<button
+							onClick={() => {
+								// dispatch({ type: ShowSummationActionKind.SHOW, payload: true });
+								dispatch({ type: ShowSummationActionKind.SHOW });
+							}}
+						>
+							แสดง
+						</button>
+						<button
+							onClick={() => {
+								// dispatch({ type: ShowSummationActionKind.HIDE, payload: false });
+								dispatch({ type: ShowSummationActionKind.HIDE });
+							}}
+						>
+							ซ่อน
+						</button>
+					</div>
 				</div>
 			</DataContext.Provider>
 		</>

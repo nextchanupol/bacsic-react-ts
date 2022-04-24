@@ -10,7 +10,7 @@ interface FormComponentProps {
 const FormComponent: FC<FormComponentProps> = (props) => {
 	const { onAddNewItem } = props;
 
-	const [title, setTitle] = useState<string>("");
+	const [title, setTitle] = useState<string>('');
 	const [amount, setAmount] = useState<number>(0);
 	const [formValid, setFormValid] = useState<boolean>(false);
 
