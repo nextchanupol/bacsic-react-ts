@@ -93,7 +93,7 @@ function App() {
 			>
 				<div className="container">
 					<h1 style={styles.h1}>Basic React</h1>
-					Current State: {showSummation.isShow.toString()}
+					Current State With useReducer : {showSummation.isShow.toString()}
 					{showSummation.isShow && <Summation />}
 					<FormComponent onAddNewItem={onAddNewItem} />
 					<Transaction items={items} />
