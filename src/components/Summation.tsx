@@ -47,7 +47,7 @@ const Summation: FC = () => {
 					<p style={styles.rptInc}>{income}</p>
 				</div>
 				<div style={styles.rptContainerDiv}>
-					<h4>Income</h4>
+					<h4>Expense</h4>
 					<p style={styles.rptExp}>{expense}</p>
 				</div>
 			</div>
