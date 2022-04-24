@@ -16,7 +16,7 @@ const Item: FC<ItemProps> = (props) => {
 				{title}
 				<span>
 					{symbol}
-					{Math.abs(amount)}
+					{Math.abs(amount).toFixed(2)}
 				</span>
 			</li>
 		</>
